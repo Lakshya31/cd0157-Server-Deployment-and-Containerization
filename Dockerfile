@@ -7,11 +7,11 @@ COPY . /app
 WORKDIR /app
 
 #Config
-RUN pip config set global.trusted-host "pypi.python.org pypi.org files.pythonhosted.org"
+# RUN pip config set global.trusted-host "pypi.python.org pypi.org files.pythonhosted.org"
 
 # Install `pip` and needed Python packages from `requirements.txt`
-RUN pip install --upgrade pip --proxy=http://proxy-ap.shell.com:8080
-RUN pip install -r requirements.txt --proxy=http://proxy-ap.shell.com:8080
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
 
 # Define an entrypoint which will run the main app using the Gunicorn WSGI server.
 ENTRYPOINT ["gunicorn", "-b", ":8080", "main:APP"]
